@@ -1,0 +1,13 @@
+{
+  "name": "group_sync",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "frontend": "cd frontend && pnpm run dev",
+    "backend": "cd backend && pnpm run start",
+    "dev": "concurrently \"pnpm backend\" \"pnpm frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
