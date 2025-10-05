@@ -1,1 +1,55 @@
+<<<<<<< Updated upstream
 node_modules
+=======
+# Dependencies
+node_modules/
+npm-debug.log*\
+pnpm-debug.log*
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Environment variables
+.env
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Test coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache
+.npm/
+
+# Optional eslint cache
+.eslintcache
+
+# Optional TypeScript cache
+*.tsbuildinfo
+
+# Production files
+.cache/
+
+# Temporary files
+tmp/
+temp/
+>>>>>>> Stashed changes
