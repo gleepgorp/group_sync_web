@@ -7,17 +7,30 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -p tsconfig.json",
-    "start": "node dist/index.js"
+    "dev": "tsx watch --tsconfig tsconfig.json src/index.ts",
+    "start": "NODE_ENV=production fastify start -l info dist/index.js",
+    "start:prod": "NODE_ENV=production fastify start -l info dist/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.18.0",
   "dependencies": {
-    "fastify": "^5.6.1"
+    "@fastify/cors": "^11.1.0",
+    "@fastify/helmet": "^13.0.2",
+    "@fastify/jwt": "^10.0.0",
+    "@fastify/rate-limit": "^10.3.0",
+    "dotenv": "^17.2.3",
+    "fastify": "^5.6.1",
+    "fastify-cli": "^7.4.0",
+    "fastify-plugin": "^5.1.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@types/node": "^24.6.2",
+    "eslint": "^9.37.0",
+    "pino-pretty": "^13.1.2",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   }
 }
