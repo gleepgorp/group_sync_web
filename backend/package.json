@@ -9,7 +9,9 @@
     "build": "tsc -p tsconfig.json",
     "dev": "tsx watch --tsconfig tsconfig.json src/index.ts",
     "start": "NODE_ENV=production fastify start -l info dist/index.js",
-    "start:prod": "NODE_ENV=production fastify start -l info dist/index.js"
+    "start:prod": "NODE_ENV=production fastify start -l info dist/index.js",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +30,8 @@
   },
   "devDependencies": {
     "@types/node": "^24.6.2",
+    "@typescript-eslint/eslint-plugin": "^8.46.0",
+    "@typescript-eslint/parser": "^8.46.0",
     "eslint": "^9.37.0",
     "pino-pretty": "^13.1.2",
     "tsx": "^4.20.6",
