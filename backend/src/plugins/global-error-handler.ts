@@ -1,5 +1,5 @@
 import { GSError } from "errors/core";
-import fastify, { FastifyInstance } from "fastify";
+import type { FastifyInstance } from "fastify";
 import fp from "fastify-plugin";
 import { ZodError } from "zod";
 
@@ -18,7 +18,7 @@ export const globalErrorHandler = fp(async (fastify: FastifyInstance) => {
       reply.code(error.status).send({
          ...error,
          path: request.routeOptions.url
-      })
+      });
     }
 
     if (error instanceof Error) {
@@ -27,14 +27,14 @@ export const globalErrorHandler = fp(async (fastify: FastifyInstance) => {
           errorCode: error.code,
           message: error.message,
           path: request.routeOptions.url
-        })
+        });
       }
     }
 
     reply.code(500).send({
       error
-    })
-  })
+    });
+  });
 }, { name: "global-error-handler" });
 
 export default globalErrorHandler;

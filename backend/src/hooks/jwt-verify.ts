@@ -1,5 +1,5 @@
 import { RouteDoesNotExist } from "errors/business";
-import { FastifyRequest, FastifyReply } from "fastify";
+import type { FastifyRequest, FastifyReply } from "fastify";
 import { PUBLIC_ROUTES } from "utils/constants";
 
 export const jwtVerify = async (
@@ -11,13 +11,15 @@ export const jwtVerify = async (
     }
 
     const isPublic = PUBLIC_ROUTES.includes(request.routeOptions.url);
-    const isRegistration = 
+    const isRegistration =
       request.routeOptions.url === "/api/v1/users" &&
       request.method === "POST";
 
-    if (isPublic || isRegistration) return;
+    if (isPublic || isRegistration) {
+      return;
+    }
 
     await request.jwtVerify();
-}
+};
 
 export default jwtVerify;

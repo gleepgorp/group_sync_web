@@ -1,4 +1,4 @@
-import fastify, { FastifyInstance } from "fastify";
+import type { FastifyInstance } from "fastify";
 
 const mainRoute = async (fastify: FastifyInstance) => {
   fastify.route({
@@ -9,7 +9,7 @@ const mainRoute = async (fastify: FastifyInstance) => {
 };
 
 export const apiRoutes = async (fastify: FastifyInstance) => {
-  await fastify.register(mainRoute)
+  await fastify.register(mainRoute);
 };
 
 export default apiRoutes;

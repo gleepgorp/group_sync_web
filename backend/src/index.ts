@@ -20,10 +20,10 @@ const fastify = Fastify({
   }
 });
 
-serverConfigs(fastify);
-serverPlugins(fastify);
-serverHooks(fastify);
-apiRoutes(fastify);
+await serverConfigs(fastify);
+await serverPlugins(fastify);
+await serverHooks(fastify);
+await apiRoutes(fastify);
 
 const start =  async () => {
   try {
@@ -43,4 +43,4 @@ const start =  async () => {
   }
 };
 
-start();
+await start();

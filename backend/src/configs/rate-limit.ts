@@ -4,4 +4,4 @@ export default {
   cache: 10000,
   redis: null,
   skipOnError: true
-}
+};

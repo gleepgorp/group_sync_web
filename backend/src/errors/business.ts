@@ -8,4 +8,4 @@ export class RouteDoesNotExist extends GSError {
       message: "Route not found."
     });
   }
-}
+};
