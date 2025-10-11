@@ -9,6 +9,7 @@ export default defineConfig([
   globalIgnores(["dist", "node_modules"]),
   {
     files: ["**/*.{ts,tsx}"],
+    ignores: ["*.config.{ts,js}", "vite.config.ts"],
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
@@ -20,7 +21,7 @@ export default defineConfig([
       sourceType: "module",
       globals: globals.browser,
       parserOptions: {
-        project: "./tsconfig.json"
+        project: "./tsconfig.app.json"
       }
     },
     rules: {
