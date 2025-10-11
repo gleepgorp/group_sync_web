@@ -31,5 +31,9 @@
     }
 
   },
-  "include": ["src"]
+  "include": [
+    "src/**/*",
+    "src/**/*.tsx",
+    "vite.config.ts"
+  ]
 }
