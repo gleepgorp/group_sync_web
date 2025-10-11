@@ -49,7 +49,24 @@ export default defineConfig([
       "@typescript-eslint/consistent-type-imports": ["error", { prefer: "type-imports" }],
       "@typescript-eslint/no-floating-promises": "error",
       "@typescript-eslint/await-thenable": "error",
-      "@typescript-eslint/no-misused-promises": ["error", { checksVoidReturn: false }]
+      "@typescript-eslint/no-misused-promises": ["error", { checksVoidReturn: false }],
+      "prefer-template": "error",
+      "no-else-return": "error",
+      "no-useless-return": "error",
+      "no-lonely-if": "error",
+      "no-useless-concat": "error",
+      "yoda": "error",
+      "default-case-last": "error",
+
+      "no-await-in-loop": "warn",
+      "no-promise-executor-return": "error",
+      "no-unreachable-loop": "error",
+      "prefer-promise-reject-errors": "error",
+
+      "react-hooks/exhaustive-deps": "warn",
+      "react-refresh/only-export-components": ["warn", { 
+        allowConstantExport: true 
+      }]
     }
   }
 ]);
