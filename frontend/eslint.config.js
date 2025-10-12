@@ -9,6 +9,7 @@ export default defineConfig([
   globalIgnores(["dist", "node_modules"]),
   {
     files: ["**/*.{ts,tsx}"],
+    ignores: ["*.config.{ts,js}", "vite.config.ts"],
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
@@ -18,7 +19,10 @@ export default defineConfig([
     languageOptions: {
       ecmaVersion: 2024,
       sourceType: "module",
-      globals: globals.browser
+      globals: globals.browser,
+      parserOptions: {
+        project: "./tsconfig.app.json"
+      }
     },
     rules: {
       "no-console": "off",
