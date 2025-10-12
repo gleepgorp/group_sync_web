@@ -2,6 +2,7 @@
   "name": "group_sync",
   "version": "1.0.0",
   "private": true,
+  "license": "AGPL-3.0-or-later",
   "scripts": {
     "frontend": "cd frontend && pnpm run dev",
     "backend": "cd backend && pnpm run dev",

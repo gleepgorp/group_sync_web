@@ -15,7 +15,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "AGPL-3.0-or-later",
   "packageManager": "pnpm@10.18.0",
   "dependencies": {
     "@fastify/cors": "^11.1.0",
