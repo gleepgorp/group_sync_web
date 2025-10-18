@@ -7,10 +7,10 @@ import WeekCalendarView from "./WeekCalendarView";
 import { cn } from "@/utils/cn";
 
 interface CalendarTabProps {
-  onPrevious: () => void;
-  onNext: () => void;
-  previousAriaLabel: string;
-  nextAriaLabel: string;
+  onPrevious?: () => void;
+  onNext?: () => void;
+  previousAriaLabel?: string;
+  nextAriaLabel?: string;
 }
 
 function getDaysInMonth(year: number, monthIndex: number) {

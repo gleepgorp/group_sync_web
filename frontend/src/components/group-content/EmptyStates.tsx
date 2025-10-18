@@ -29,8 +29,7 @@ export function ListEmpty({ onCreate }: ListEmptyProps) {
   );
 }
 
-export interface CalendarEmptyProps {}
-export function CalendarEmpty(_props: CalendarEmptyProps) {
+export function CalendarEmpty() {
   return (
     <EmptyBase title="No events on this month" description="Once you add events, they'll appear on your calendar here." />
   );
