@@ -1,9 +1,14 @@
 import { useMemo, useState } from "react";
-import { Button } from "@/components/ui/button";
+import PrevNextButtons from "@/components/base/BasePrevNextButtons";
 import { MONTHS } from "@/constants/months";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import DayWeekMonthFilterTab from "./DayWeekMonthFilterTab";
 
-interface CalendarTabProps {}
+interface CalendarTabProps {
+  onPrevious: () => void;
+  onNext: () => void;
+  previousAriaLabel: string;
+  nextAriaLabel: string;
+}
 
 function getDaysInMonth(year: number, monthIndex: number) {
   return new Date(year, monthIndex + 1, 0).getDate();
@@ -68,25 +73,27 @@ export function CalendarTab(_props: CalendarTabProps) {
 
   return (
     <div className="px-6 pb-6">
-      <div className="flex items-center mb-3">
-        <div className="text-2xl font-bold tracking-tight min-w-52">{headerLabel}</div>
-        <div className="flex items-center gap-2 ml-6">
-          <Button variant="ghost" size="icon" aria-label="Previous month" onClick={prev}>
-            <ChevronLeftIcon className="size-4" />
-          </Button>
-          <Button variant="ghost" size="icon" aria-label="Next month" onClick={next}>
-            <ChevronRightIcon className="size-4" />
-          </Button>
+      <div className="flex items-center mb-3 py-4 justify-between">
+        <div className="flex items-center">
+          <div className="text-2xl font-bold tracking-tight min-w-52">{headerLabel}</div>
+          <PrevNextButtons
+            className="ml-6"
+            onPrevious={prev}
+            onNext={next}
+            previousAriaLabel="Previous month"
+            nextAriaLabel="Next month"
+          />
         </div>
+        <DayWeekMonthFilterTab />
       </div>
       <div className="grid grid-cols-7 gap-2 text-sm text-muted-foreground mb-2">
         {daysOfWeek.map(d => (
           <div key={d} className="p-2 text-center font-medium">{d}</div>
         ))}
       </div>
-      <div className="grid grid-cols-7 gap-2">
+      <div className="grid grid-cols-7">
         {cells.map((c, i) => (
-          <div key={i} className="aspect-square border rounded-md flex items-start justify-start p-2 text-sm text-muted-foreground">
+          <div key={i} className="aspect-square border flex items-start justify-start p-2 text-sm text-muted-foreground">
             {c.isCurrentMonth ? c.day : ""}
           </div>
         ))}

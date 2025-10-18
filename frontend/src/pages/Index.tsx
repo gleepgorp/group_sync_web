@@ -1,7 +1,9 @@
 import { MainLayout } from "@/layouts/MainLayout";
-import NavigationSidebar from "@/components/NavigationSidebar";
+import NavigationSidebar, { type NavigationKey } from "@/components/NavigationSidebar";
 import GroupsSidebar, { type Group } from "@/components/GroupsSidebar";
-import GroupContent, { type ScheduleItem } from "@/components/GroupContent";
+import GroupContent from "@/components/GroupContent";
+import type { ScheduleItem } from "@/components/group-content/CommonScheduleList";
+import ProfileContent from "@/pages/ProfileContent.tsx";
 import { useMemo, useState } from "react";
 
 /**
@@ -10,6 +12,7 @@ import { useMemo, useState } from "react";
 export default function Index() {
   const [activeGroupId, setActiveGroupId] = useState<string>("g1");
   const [activeTab, setActiveTab] = useState<"list" | "calendar" | "itineraries">("list");
+  const [activeNav, setActiveNav] = useState<NavigationKey>("home");
 
   const groups: Group[] = useMemo(
     () => [
@@ -36,7 +39,7 @@ export default function Index() {
   return (
     <MainLayout>
       <div className="flex h-screen overflow-hidden">
-        <NavigationSidebar />
+        <NavigationSidebar active={activeNav} onNavigate={setActiveNav} />
 
         <GroupsSidebar
           groups={groups}
@@ -45,14 +48,28 @@ export default function Index() {
           onCreateGroup={() => {}}
         />
 
-        <GroupContent
-          groupId={selectedGroup.id}
-          groupName={selectedGroup.name}
-          activeTab={activeTab}
-          onTabChange={setActiveTab}
-          onFindCommonSchedule={handleFindCommonSchedule}
-          schedules={schedules}
-        />
+        {activeNav === "home" && (
+          <GroupContent
+            groupId={selectedGroup.id}
+            groupName={selectedGroup.name}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+            onFindCommonSchedule={handleFindCommonSchedule}
+            schedules={schedules}
+          />
+        )}
+
+        {activeNav === "profile" && (
+          <div className="flex-1 flex flex-col">
+            <ProfileContent />
+          </div>
+        )}
+
+        {activeNav === "settings" && (
+          <div className="flex-1 flex items-center justify-center text-muted-foreground">
+            Settings coming soon
+          </div>
+        )}
       </div>
     </MainLayout>
   );

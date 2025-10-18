@@ -16,7 +16,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Index from "@/pages/Index";
 import Login from "@/pages/Login";
-import MySchedule from "@/pages/MySchedule";
 
 /**
  * Main App component with route definitions
@@ -27,7 +26,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/my-schedule" element={<MySchedule />} />
       </Routes>
     </Router>
   );

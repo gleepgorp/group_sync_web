@@ -132,7 +132,7 @@ function GroupListItem({ group, isActive, onClick, onOptionsClick }: GroupListIt
       className={cn(
         "group flex items-center justify-between gap-2 py-3 px-3 rounded-md cursor-pointer",
         "hover:bg-accent/40 border-b border-border/70",
-        isActive && "bg-accent/70"
+        isActive && "bg-accent/40"
       )}
       title={group.name}
     >

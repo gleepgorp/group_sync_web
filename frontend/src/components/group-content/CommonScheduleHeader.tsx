@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import PrevNextButtons from "@/components/base/BasePrevNextButtons";
 
 interface CommonScheduleHeaderProps {
   currentMonth: string;
@@ -11,14 +10,13 @@ export function CommonScheduleHeader({ currentMonth, onPreviousMonth, onNextMont
   return (
     <div className="flex items-center px-6 py-4">
       <div className="text-2xl font-bold tracking-tight min-w-52">{currentMonth}</div>
-      <div className="flex items-center gap-2 ml-6">
-        <Button variant="ghost" size="icon" aria-label="Previous month" onClick={onPreviousMonth}>
-          <ChevronLeftIcon className="size-4" />
-        </Button>
-        <Button variant="ghost" size="icon" aria-label="Next month" onClick={onNextMonth}>
-          <ChevronRightIcon className="size-4" />
-        </Button>
-      </div>
+      <PrevNextButtons
+        className="ml-6"
+        onPrevious={onPreviousMonth}
+        onNext={onNextMonth}
+        previousAriaLabel="Previous month"
+        nextAriaLabel="Next month"
+      />
     </div>
   );
 }
