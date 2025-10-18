@@ -1,12 +1,25 @@
-import { GSError } from "errors/core";
+import { GSError, firebaseErrorToHttpStatus } from "errors/core";
 import type { FastifyInstance } from "fastify";
 import fp from "fastify-plugin";
+import { FirestoreErrorSchema } from "types/firestore";
 import { ZodError } from "zod";
 
-export const globalErrorHandler = fp(async (fastify: FastifyInstance) => {
+const globalErrorHandler = fp(async (fastify: FastifyInstance) => {
   fastify.setErrorHandler((error, request, reply) => {
+
+    const firestoreValdiation = FirestoreErrorSchema.safeParse(error);
+
+    if (firestoreValdiation.success) {
+      const code = firebaseErrorToHttpStatus(firestoreValdiation.data.code);
+      return reply.code(code).send({
+        errorCode: error.code.toLocaleUpperCase(),
+        message: error.message,
+        path: request.routeOptions.url
+      });
+    }
+
     if (error instanceof ZodError) {
-      reply.code(400).send({
+      return reply.code(400).send({
         errorCode: "VALIDATION_ERROR",
         message: "The server cannot or will not process the request due to malformed syntax.",
         issues: error.issues,
@@ -15,7 +28,7 @@ export const globalErrorHandler = fp(async (fastify: FastifyInstance) => {
     }
 
     if (error instanceof GSError) {
-      reply.code(error.status).send({
+      return reply.code(error.status).send({
          ...error,
          path: request.routeOptions.url
       });
@@ -23,7 +36,7 @@ export const globalErrorHandler = fp(async (fastify: FastifyInstance) => {
 
     if (error instanceof Error) {
       if (error.statusCode) {
-        reply.code(error.statusCode).send({
+        return reply.code(error.statusCode).send({
           errorCode: error.code,
           message: error.message,
           path: request.routeOptions.url
@@ -31,7 +44,7 @@ export const globalErrorHandler = fp(async (fastify: FastifyInstance) => {
       }
     }
 
-    reply.code(500).send({
+    return reply.code(500).send({
       error
     });
   });

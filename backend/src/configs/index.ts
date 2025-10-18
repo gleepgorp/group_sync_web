@@ -8,7 +8,7 @@ import corsConfig from "./cors";
 import jwtConfig from "./jwt";
 import rateLimitConfig from "./rate-limit";
 
-export const serverConfigs = async (fastify: FastifyInstance) => {
+const serverConfigs = async (fastify: FastifyInstance) => {
   fastify.server.keepAliveTimeout = 61 * 1000;
   fastify.server.headersTimeout = 65 * 1000;
 
