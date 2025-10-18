@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -37,14 +38,17 @@ const buttonVariants = cva(
 );
 
 function Button({
+  icon,
   className,
   variant,
   size,
   asChild = false,
+  children,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
-    asChild?: boolean
+    icon?: React.ReactNode;
+    asChild?: boolean;
   }) {
   const Comp = asChild ? Slot : "button";
 
@@ -53,7 +57,11 @@ function Button({
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
-    />
+    >
+      {/* // adjustment: move icon inside button */}
+      {icon && <span className="size-4 shrink-0">{icon}</span>}
+      {children}
+    </Comp>
   );
 }
 
