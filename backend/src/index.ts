@@ -14,10 +14,10 @@
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 import Fastify from "fastify";
-import serverConfigs from "@configs/index";
-import serverPlugins from "@plugins/index";
-import serverHooks from "@hooks/index";
-import apiRoutes from "@routes/index";
+import serverConfigs from "./configs";
+import serverPlugins from "./plugins";
+import serverHooks from "./hooks";
+import apiRoutes from "./routes";
 import "dotenv/config";
 
 const fastify = Fastify({

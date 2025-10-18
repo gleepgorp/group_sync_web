@@ -13,13 +13,6 @@
     "resolveJsonModule": true,
     "declaration": true,
     "baseUrl": "./src",
-    "paths": {
-      "@configs/*": ["configs/*"],
-      "@hooks/*": ["hooks/*"],
-      "@routes/*": ["routes/*"],
-      "@utils/*": ["utils/*"],
-      "@plugins/*": ["plugins/*"]
-    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
