@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MoreVertical, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
+import CreateGroupDialog from "@/components/groups/CreateGroupDialog";
+import { GroupsSidebarEmpty } from "@/components/group-content/EmptyStates";
 
 export interface Group {
   id: string;
@@ -40,6 +42,7 @@ export function GroupsSidebar({
   onCreateGroup
 }: GroupsSidebarProps) {
   const [query, setQuery] = useState("");
+  const [open, setOpen] = useState(false);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -48,22 +51,35 @@ export function GroupsSidebar({
   }, [groups, query]);
 
   return (
-    <aside className="w-[340px] max-w-[380px] min-w-[320px] bg-sidebar border-r flex-shrink-0 md:flex hidden flex-col">
-      <GroupsSidebarHeader onCreateGroup={onCreateGroup} />
+    <aside className="w-[340px] max-w-[380px] min-w-[320px] bg-sidebar/50 border-r flex-shrink-0 md:flex hidden flex-col">
+      <GroupsSidebarHeader onCreateGroup={() => setOpen(true)} />
       <GroupSearchBar value={query} onChange={setQuery} placeholder="Search groups" />
       <div className="flex-1 overflow-y-auto px-2 py-1">
-        <div className="flex flex-col">
-          {filtered.map(group => (
-            <GroupListItem
-              key={group.id}
-              group={group}
-              isActive={group.id === activeGroupId}
-              onClick={() => onGroupSelect(group.id)}
-              onOptionsClick={() => {}}
-            />
-          ))}
-        </div>
+        {filtered.length === 0 ? (
+          <div className="px-2"><GroupsSidebarEmpty onCreate={() => setOpen(true)} /></div>
+        ) : (
+          <div className="flex flex-col">
+            {filtered.map(group => (
+              <GroupListItem
+                key={group.id}
+                group={group}
+                isActive={group.id === activeGroupId}
+                onClick={() => onGroupSelect(group.id)}
+                onOptionsClick={() => {}}
+              />
+            ))}
+          </div>
+        )}
       </div>
+      <CreateGroupDialog
+        open={open}
+        onOpenChange={setOpen}
+        onConfirm={() => {
+          onCreateGroup();
+          setOpen(false);
+          // Placeholder: integrate persistence later
+        }}
+      />
     </aside>
   );
 }
@@ -115,7 +131,7 @@ function GroupListItem({ group, isActive, onClick, onOptionsClick }: GroupListIt
       onClick={onClick}
       className={cn(
         "group flex items-center justify-between gap-2 py-3 px-3 rounded-md cursor-pointer",
-        "hover:bg-accent/60 border-b border-border/70",
+        "hover:bg-accent/40 border-b border-border/70",
         isActive && "bg-accent/70"
       )}
       title={group.name}

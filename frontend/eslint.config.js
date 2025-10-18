@@ -35,13 +35,13 @@ export default defineConfig([
       "no-duplicate-imports": "error",
       "eqeqeq": ["error", "always", { null: "ignore" }],
       "curly": ["error", "all"],
-      "comma-dangle": ["error", "never"],
+      "comma-dangle": "off",
       "arrow-spacing": "error",
       "space-before-blocks": "error",
       "keyword-spacing": "error",
-      "no-multiple-empty-lines": ["error", { max: 1, maxEOF: 0 }],
-      "no-trailing-spaces": "error",
-      "eol-last": ["error", "always"],
+      "no-multiple-empty-lines": "off",
+      "no-trailing-spaces": "off",
+      "eol-last": "off",
 
       "@typescript-eslint/no-unused-vars": ["warn", { 
         argsIgnorePattern: "^_", 

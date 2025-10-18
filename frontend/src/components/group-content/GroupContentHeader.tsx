@@ -1,47 +1,50 @@
-import { CalendarDays, List, Map } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+// adjustment: converted to shadcn Tabs
+import { CalendarDays, List, Map, UserPlusIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface GroupContentHeaderProps {
   activeTab: "list" | "calendar" | "itineraries";
-  onTabChange: (tab: "list" | "calendar" | "itineraries") => void;
+  onTabChange: (value: "list" | "calendar" | "itineraries") => void;
   onFindCommonSchedule: () => void;
+  setIsOpenInviteDialog: (open: boolean) => void;
 }
 
-export function GroupContentHeader({ activeTab, onTabChange, onFindCommonSchedule }: GroupContentHeaderProps) {
-  const tabButtonClass = (isActive: boolean) =>
-    buttonVariants({
-      variant: "ghost",
-      size: "sm",
-      className: cn("rounded-lg", isActive && "data-[active=true]:")
-    });
-
+export function GroupContentHeader({
+  activeTab,
+  onTabChange,
+  onFindCommonSchedule,
+  setIsOpenInviteDialog
+}: GroupContentHeaderProps) {
   return (
     <div className="flex items-center justify-between px-6 py-4 border-b">
-      <div className="flex items-center gap-6">
-        <button
-          className={tabButtonClass(activeTab === "list")}
-          data-active={activeTab === "list"}
-          onClick={() => onTabChange("list")}
+      <Tabs value={activeTab} onValueChange={onTabChange as (value: string) => void}>
+        <TabsList className="flex gap-2">
+          <TabsTrigger value="list" className="flex items-center gap-2">
+            <List className="size-4" /> List
+          </TabsTrigger>
+          <TabsTrigger value="calendar" className="flex items-center gap-2">
+            <CalendarDays className="size-4" /> Calendar
+          </TabsTrigger>
+          <TabsTrigger value="itineraries" className="flex items-center gap-2">
+            <Map className="size-4" /> Itineraries
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
+
+      <div className="flex items-center gap-2">
+        <Button
+          icon={<UserPlusIcon className="size-4" />}
+          variant="outline"
+          className="rounded-lg"
+          onClick={() => setIsOpenInviteDialog(true)}
         >
-          <List className="mr-2 size-4" /> List
-        </button>
-        <button
-          className={tabButtonClass(activeTab === "calendar")}
-          data-active={activeTab === "calendar"}
-          onClick={() => onTabChange("calendar")}
-        >
-          <CalendarDays className="mr-2 size-4" /> Calendar
-        </button>
-        <button
-          className={tabButtonClass(activeTab === "itineraries")}
-          data-active={activeTab === "itineraries"}
-          onClick={() => onTabChange("itineraries")}
-        >
-          <Map className="mr-2 size-4" /> Itineraries
-        </button>
+          Invite
+        </Button>
+        <Button className="rounded-lg" onClick={onFindCommonSchedule}>
+          Find common schedule
+        </Button>
       </div>
-      <Button className="rounded-lg" onClick={onFindCommonSchedule}>Find common schedule</Button>
     </div>
   );
 }

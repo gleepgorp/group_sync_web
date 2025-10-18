@@ -5,13 +5,16 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
+  DialogTrigger
 } from "@/components/ui/dialog";
 import type { ReactNode } from "react";
 
 interface BaseDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  /** Optional trigger element; if provided, wraps with DialogTrigger */
+  trigger?: ReactNode;
   title: string;
   description?: string;
   children: ReactNode;
@@ -25,6 +28,7 @@ interface BaseDialogProps {
 export function BaseDialog({
   open,
   onOpenChange,
+  trigger,
   title,
   description,
   children,
@@ -35,19 +39,16 @@ export function BaseDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
+      {trigger ? <DialogTrigger asChild>{trigger}</DialogTrigger> : null}
       <DialogContent className={`${maxWidthClass} rounded-2xl`}>
         <DialogHeader className="border-b border-border pb-4">
           <DialogTitle className="text-xl font-semibold">
             {title}
           </DialogTitle>
-          {description && (
-            <DialogDescription className="text-sm text-muted-foreground mt-1">
-              {description}
-            </DialogDescription>
-          )}
+          {description}
         </DialogHeader>
 
-        <div className="py-4">
+        <div className="">
           {children}
         </div>
 
