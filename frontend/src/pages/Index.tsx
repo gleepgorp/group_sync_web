@@ -32,7 +32,7 @@ export default function Index() {
 
   const handleFindCommonSchedule = () => {
     // Placeholder: integrate with backend later
-    // eslint-disable-next-line no-alert
+     
     alert("Finding common schedule...");
   };
 
